@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --modra: #3629f5;
+  --oranzova1: #f58542;
+  --oranzova2: #fe6b02;
+  --oranzova3: #e74e2b;
+  --seda: #52566d;
+  --tmavemodra: #272c48;
+  --grey: grey;
+}
+* {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+}
+
+body {
+  background-color: var(--seda);
+  margin: 0;
+}
+
+footer {
+  color: #fff;
+  background-color: var(--tmavemodra);
+  text-align: center;
+  padding: 1em;
+  margin-top: auto;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.StyledLink {
+  text-decoration: underline;
+  color: var(--oranzova2);
+
+  &:hover {
+    text-decoration: none;
+  }
+}

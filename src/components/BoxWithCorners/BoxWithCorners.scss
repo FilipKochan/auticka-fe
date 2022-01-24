@@ -1,0 +1,28 @@
+.BoxWithCorners {
+  background-color: var(--tmavemodra);
+  padding: 1rem;
+  position: relative;
+  color: white;
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    background-color: var(--oranzova2);
+  }
+
+  &::before {
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transform: translate(5%, -5%);
+  }
+
+  &::after {
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform: translate(-5%, 5%);
+  }
+}

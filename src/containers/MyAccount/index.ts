@@ -1,2 +1,2 @@
-import MyAccount from './MyAccount'
-export default MyAccount
+import MyAccount from './MyAccount';
+export default MyAccount;

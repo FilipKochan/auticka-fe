@@ -1,0 +1,128 @@
+.HomeNavbar {
+  padding: 2rem 3rem;
+  display: inline-flex;
+  min-width: 17rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--tmavemodra);
+  position: relative;
+  list-style: none;
+  -webkit-box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+  box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    background-color: var(--oranzova2);
+  }
+
+  &::before {
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transform: translate(5%, -5%);
+  }
+
+  &::after {
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform: translate(-5%, 5%);
+  }
+
+  &__Link {
+    display: block;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    background: none;
+    position: relative;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+
+    &::before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: '\f054';
+      font-size: 3rem;
+      color: var(--oranzova2);
+      position: absolute;
+      left: -1rem;
+      top: 50%;
+      transform: translate(-100%, -50%);
+      opacity: 0;
+      transition: 100ms cubic-bezier(0.175, 0.885, 0.32, 1.375);
+      pointer-events: none;
+    }
+
+    &:hover::before {
+      opacity: 1;
+      left: -5px;
+    }
+  }
+}
+
+.Navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--tmavemodra);
+
+  &__Link {
+    text-decoration: none;
+    display: inline;
+    margin: 0;
+    border: none;
+    padding: 0.6rem 1rem;
+    margin: 0;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+    transition: 200ms linear;
+    position: relative;
+    cursor: pointer;
+    &--active {
+      font-weight: 600;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      height: 0%;
+      width: 2px;
+      background-color: var(--oranzova2);
+      transition: 200ms linear;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -1px;
+      height: 0%;
+      width: 2px;
+      background-color: var(--oranzova2);
+      transition: 200ms linear;
+    }
+
+    &:hover::before,
+    &:hover::after {
+      height: 100%;
+    }
+
+    &:last-child {
+      margin-left: 5rem;
+    }
+  }
+}

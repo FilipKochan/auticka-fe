@@ -1,0 +1,40 @@
+h1.Title {
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  text-align: center;
+  color: #fff;
+  background-color: var(--oranzova2);
+  position: relative;
+  justify-self: center;
+  text-transform: uppercase;
+  border-radius: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  &:before {
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transform: translate(15%, -15%);
+  }
+
+  &::after {
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transform: translate(-15%, 15%);
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--tmavemodra);
+    border-radius: 10px;
+  }
+}
+.TitleWrapper {
+  display: grid;
+  place-items: center;
+}

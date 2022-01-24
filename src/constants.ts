@@ -1,0 +1,9 @@
+export const apiBaseUrl = 'http://localhost:3001';
+
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+
+export const SET_USER_REQUESTING = 'SET_USER_REQUESTING';
+export const SET_USER_SUCCESS = 'SET_USER_SUCCESS';
+export const SET_USER_ERROR = 'SET_USER_ERROR';

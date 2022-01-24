@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { Route, Navigate, RouteProps, NavigateProps } from "react-router-dom";
+import React, { FunctionComponent } from 'react';
+import { Route, Navigate, RouteProps, NavigateProps } from 'react-router-dom';
 
 interface PrivateRouteProps extends RouteProps {
   component: any;
@@ -19,7 +19,7 @@ const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({
     return (
       <Navigate
         to={{
-          pathname: "/login",
+          pathname: '/login',
         }}
         // state: {{from:...}}
       />

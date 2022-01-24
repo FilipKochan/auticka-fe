@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../selectors';
+import { Navigate } from 'react-router-dom';
 
 const MyAccount: React.FC = () => {
-    return (
-        <div>
-            MyAccount
-        </div>
-    )
-}
+  const user = useSelector(getUser);
 
-export default MyAccount
+  return user.name ? <div>'user logged in!'</div> : <Navigate to="/login" />;
+};
+
+export default MyAccount;

@@ -1,0 +1,56 @@
+.SituationsTests {
+  padding: 2rem 2rem;
+  margin: auto;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--tmavemodra);
+  position: relative;
+  -webkit-box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+  box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);
+
+  ul {
+    list-style: none;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  li {
+    padding: 0;
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+    cursor: pointer;
+    &::before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: '\f054';
+      font-size: 3rem;
+      color: var(--oranzova2);
+      position: absolute;
+      left: -2rem;
+      top: 50%;
+      transform: translate(-100%, -50%);
+      transition: 100ms cubic-bezier(0.175, 0.885, 0.32, 1.375);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    span {
+      font-size: 1rem;
+    }
+
+    &:hover::before {
+      left: -0.75rem;
+      opacity: 1;
+    }
+  }
+}

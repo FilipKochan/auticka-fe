@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const OwnSituations: React.FC = () => {
-    return (
-        <div>
-            own situations
-        </div>
-    )
-}
+  return <div>Own situations</div>;
+};
 
-export default OwnSituations
+export default OwnSituations;
