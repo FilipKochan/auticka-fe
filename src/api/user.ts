@@ -8,3 +8,11 @@ export const loginUser = (name: string, password: string) => {
     { headers: { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
   );
 };
+
+export const createUser = (name: string, password: string) => {
+  return axios.post(
+    apiBaseUrl + '/user/new',
+    { name, password },
+    { headers: { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
+  );
+};

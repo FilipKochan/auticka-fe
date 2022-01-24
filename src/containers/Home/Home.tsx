@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import img from '../../images/uvodni-img.png';
 import Navbar from '../../components/Navbar';
 import './Home.scss';
 import Title from '../../components/Title/Title';
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Na křižovatky s rozumem';
+  }, []);
   return (
     <>
       <div className="cesta" aria-hidden="true">

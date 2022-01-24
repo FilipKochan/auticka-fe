@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createTest } from '../../api/situationsTests';
 import { TestDifficulty, TestLength } from '../../types';
 
 import './SituationsTests.scss';
 
 const SituationsTests: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Výběr testu';
+  }, []);
   const handleNewTest = (length: TestLength, difficulty: TestDifficulty) => {
     createTest(length, difficulty).then(console.log);
   };
