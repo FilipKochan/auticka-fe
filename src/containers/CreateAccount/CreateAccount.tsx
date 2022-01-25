@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../selectors';
@@ -8,6 +8,8 @@ import { Status } from '../../types';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import FormError from '../../components/FormError/FormError';
 import { createUser } from '../../api/user';
+import { saveJWTToLocalStorage } from '../../utils';
+import { setUserFromJWT } from '../../actions/userActions';
 
 const CreateAccount = () => {
   useEffect(() => {
@@ -15,6 +17,7 @@ const CreateAccount = () => {
   }, []);
 
   const { name, state } = useSelector(getUser);
+  const [errorResponse, setErrorResponse] = useState<string>('');
   const dispatch = useDispatch();
   const validate = ({ name, password, passwordRepeat }: { name: string; password: string; passwordRepeat: string }) => {
     let errors = {};
@@ -50,10 +53,19 @@ const CreateAccount = () => {
       <BoxWithCorners>
         <Formik
           initialValues={{ name: '', password: '', passwordRepeat: '' }}
-          onSubmit={(values) => createUser(values.name, values.password)}
+          onSubmit={(values, { setSubmitting }) => {
+            createUser(values.name, values.password)
+              .then((res) => {
+                saveJWTToLocalStorage(res.data.jwt);
+                dispatch(setUserFromJWT());
+                setErrorResponse('');
+              })
+              .catch((err) => setErrorResponse(err.response.data))
+              .finally(() => setSubmitting(false));
+          }}
           validate={validate}
         >
-          {() => (
+          {({ isSubmitting }) => (
             <Form className="LoginWrapper__form">
               <Field type="text" name="name" placeholder="Uživatelské jméno" />
               <ErrorMessage name="name" component={FormError} />
@@ -61,7 +73,8 @@ const CreateAccount = () => {
               <ErrorMessage name="password" component={FormError} />
               <Field type="password" name="passwordRepeat" placeholder="Ptovrzení hesla" />
               <ErrorMessage name="passwordRepeat" component={FormError} />
-              <CustomButton type="submit" variant="primary" loading={state === Status.requesting}>
+              {errorResponse && <FormError>{errorResponse}</FormError>}
+              <CustomButton type="submit" variant="primary" loading={isSubmitting || state === Status.requesting}>
                 Vytořit účet
               </CustomButton>
               <div>
