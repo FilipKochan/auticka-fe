@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../selectors';
@@ -10,6 +10,7 @@ import FormError from '../../components/FormError/FormError';
 import { createUser } from '../../api/user';
 import { saveJWTToLocalStorage } from '../../utils';
 import { setUserFromJWT } from '../../actions/userActions';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const CreateAccount = () => {
   useEffect(() => {
@@ -19,6 +20,8 @@ const CreateAccount = () => {
   const { name, state } = useSelector(getUser);
   const [errorResponse, setErrorResponse] = useState<string>('');
   const dispatch = useDispatch();
+  const captchaRef = useRef<ReCAPTCHA>(null);
+
   const validate = ({ name, password, passwordRepeat }: { name: string; password: string; passwordRepeat: string }) => {
     let errors = {};
 
@@ -53,14 +56,18 @@ const CreateAccount = () => {
       <BoxWithCorners>
         <Formik
           initialValues={{ name: '', password: '', passwordRepeat: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            createUser(values.name, values.password)
+          onSubmit={async (values, { setSubmitting }) => {
+            const token = await captchaRef.current?.executeAsync();
+            captchaRef.current?.reset();
+            createUser(values.name, values.password, token as string)
               .then((res) => {
                 saveJWTToLocalStorage(res.data.jwt);
                 dispatch(setUserFromJWT());
                 setErrorResponse('');
               })
-              .catch((err) => setErrorResponse(err.response.data))
+              .catch((err) => {
+                setErrorResponse(err.response.data);
+              })
               .finally(() => setSubmitting(false));
           }}
           validate={validate}
@@ -88,6 +95,7 @@ const CreateAccount = () => {
           )}
         </Formik>
       </BoxWithCorners>
+      <ReCAPTCHA ref={captchaRef} sitekey={process.env.REACT_APP_SITE_KEY as string} size="invisible" />
     </div>
   ) : (
     <Navigate to="/muj-ucet" />

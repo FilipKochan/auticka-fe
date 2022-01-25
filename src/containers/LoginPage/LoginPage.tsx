@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../selectors';
@@ -9,14 +9,17 @@ import FormError from '../../components/FormError/FormError';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { Status } from '../../types';
 import { loginUserAction } from '../../actions/userActions';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Login = () => {
   useEffect(() => {
     document.title = 'Přihlášení';
   }, []);
 
-  const { name, state } = useSelector(getUser);
+  const { name, state, error } = useSelector(getUser);
   const dispatch = useDispatch();
+  const captchaRef = useRef<ReCAPTCHA>(null);
+
   const validate = ({ name, password }: { name: string; password: string }) => {
     let errors = {};
     if (!name) {
@@ -33,10 +36,12 @@ const Login = () => {
       <BoxWithCorners>
         <Formik
           initialValues={{ name: '', password: '' }}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             if (state === Status.requesting) return;
             const { name, password } = values;
-            dispatch(loginUserAction(name, password));
+            const token = await captchaRef.current?.executeAsync();
+            captchaRef.current?.reset();
+            dispatch(loginUserAction(name, password, token as string));
           }}
           validate={validate}
         >
@@ -46,7 +51,7 @@ const Login = () => {
               <ErrorMessage name="name" component={FormError} />
               <Field type="password" name="password" placeholder="Heslo" />
               <ErrorMessage name="password" component={FormError} />
-              {state === Status.error && <FormError>Nesprávné přihlašovací údaje.</FormError>}
+              {state === Status.error && <FormError>{error ? error : 'Nesprávné přihlašovací údaje.'}</FormError>}
               <CustomButton type="submit" variant="primary" loading={state === Status.requesting}>
                 Přihlásit se
               </CustomButton>
@@ -61,6 +66,7 @@ const Login = () => {
           )}
         </Formik>
       </BoxWithCorners>
+      <ReCAPTCHA ref={captchaRef} sitekey={process.env.REACT_APP_SITE_KEY as string} size="invisible" />
     </div>
   ) : (
     <Navigate to="/muj-ucet" />

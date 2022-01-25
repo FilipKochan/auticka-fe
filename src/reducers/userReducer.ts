@@ -9,7 +9,7 @@ const initUser: User = {
 export const userReducer = (state: User = initUser, action: AnyAction) => {
   switch (action.type) {
     case SET_USER_ERROR:
-      return { state: Status.error };
+      return { state: Status.error, error: action.payload.message };
     case SET_USER_REQUESTING:
       return { state: Status.requesting };
     case SET_USER_SUCCESS:

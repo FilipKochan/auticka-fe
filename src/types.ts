@@ -21,6 +21,7 @@ export interface Notification {
 export interface User {
   id?: number;
   name?: string;
+  error?: string;
   state: Status;
 }
 

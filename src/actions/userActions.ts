@@ -6,16 +6,16 @@ import { loginUser } from '../api/user';
 import { getJWTFromLocalStorage, saveJWTToLocalStorage } from '../utils';
 
 // export const loginUserAction = (name: string, password: string) => {
-export const loginUserAction = (name: string, password: string) => (dispatch: Dispatch) => {
+export const loginUserAction = (name: string, password: string, token: string) => (dispatch: Dispatch) => {
   dispatch(setUserRequesting());
-  loginUser(name, password)
+  loginUser(name, password, token)
     .then((res) => {
       const token = res.data.jwt;
       const { id, name }: any = jwtDecode(token);
       saveJWTToLocalStorage(token);
       dispatch(setUserSuccess(name, id));
     })
-    .catch((_) => dispatch(setUserError()));
+    .catch((err) => dispatch(setUserError(err.response.data)));
 };
 
 export const setUserFromJWT = () => (dispatch: Dispatch) => {
@@ -39,8 +39,8 @@ export const setUserRequesting = () => {
   return { type: SET_USER_REQUESTING };
 };
 
-export const setUserError = () => {
-  return { type: SET_USER_ERROR };
+export const setUserError = (message?: string) => {
+  return { type: SET_USER_ERROR, payload: { message } };
 };
 
 export const setUserSuccess = (name: string, id: number) => {
