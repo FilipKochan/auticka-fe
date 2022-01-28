@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { apiBaseUrl, SET_USER_ERROR, SET_USER_REQUESTING, SET_USER_SUCCESS } from '../constants';
+import { SET_USER_ERROR, SET_USER_REQUESTING, SET_USER_SUCCESS } from '../constants';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { loginUser } from '../api/user';
@@ -22,11 +22,16 @@ export const setUserFromJWT = () => (dispatch: Dispatch) => {
   const token = getJWTFromLocalStorage();
   if (!token) return;
   dispatch(setUserRequesting());
+
   axios
     .post(
-      apiBaseUrl + '/user/verify',
-      { jwt: token },
-      { headers: { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
+      '/user/verify',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
     .then((_) => {
       const { id, name }: any = jwtDecode(token);

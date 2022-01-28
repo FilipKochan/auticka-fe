@@ -4,7 +4,8 @@
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1rem;
   background-color: var(--tmavemodra);
   position: relative;
   -webkit-box-shadow: 70px 70px 58px -73px rgba(0, 0, 0, 0.75);

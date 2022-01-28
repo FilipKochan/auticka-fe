@@ -1,5 +1,6 @@
 export enum TestDifficulty {
   easy = 'easy',
+  medium = 'medium',
   hard = 'hard',
 }
 
@@ -28,6 +29,8 @@ export interface User {
 export interface State {
   user: User;
   notification: Notification;
+  situation: SituaceState;
+  test: Test;
 }
 
 export enum Status {
@@ -35,4 +38,34 @@ export enum Status {
   success = 'success',
   error = 'error',
   requesting = 'requesting',
+}
+
+export interface Auto {
+  spawn: number;
+  trasa: number;
+  rychlost: number;
+  prednostnijizda: 0 | 1;
+  idauta: number;
+}
+
+export interface Odpoved {
+  odpoved: string;
+  idodpovedi: number;
+}
+
+export interface Situace {
+  auta: Auto[];
+  odpovedi: Odpoved[];
+  mapa: number;
+  otazka?: string;
+}
+
+export interface SituaceState {
+  status: Status;
+  situace?: Situace;
+  errorMsg?: string;
+}
+
+export interface Test {
+  testLength: number;
 }

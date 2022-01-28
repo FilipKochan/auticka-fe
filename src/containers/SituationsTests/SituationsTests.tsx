@@ -1,29 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createTest } from '../../api/situationsTests';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import FormError from '../../components/FormError/FormError';
 import { TestDifficulty, TestLength } from '../../types';
 
 import './SituationsTests.scss';
 
 const SituationsTests: React.FC = () => {
+  const [error, setError] = useState<string>('');
+  const [creating, setCreating] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = 'Výběr testu';
   }, []);
+
   const handleNewTest = (length: TestLength, difficulty: TestDifficulty) => {
-    createTest(length, difficulty).then(console.log);
+    if (creating) return;
+
+    setCreating(true);
+    setError('');
+
+    createTest(length, difficulty)
+      .then((testId) => navigate(`/test/${testId}/0`))
+      .catch((msg) => {
+        setError(msg);
+        setCreating(false);
+      });
   };
 
   return (
     <div className="SituationsTests">
       {/* TODO VYBER PREDCHOZIHO TESTU */}
-
       <ul>
-        <li onClick={() => handleNewTest(TestLength.short, TestDifficulty.easy)}>
+        <li onClick={() => handleNewTest(TestLength.short, TestDifficulty.medium)}>
           Krátký test<span> – 5 náhodně vybraných otázek</span>
         </li>
-        <li onClick={() => handleNewTest(TestLength.normal, TestDifficulty.easy)}>
+        <li onClick={() => handleNewTest(TestLength.normal, TestDifficulty.medium)}>
           Střední test<span> – 10 náhodně vybraných otázek</span>
         </li>
-        <li onClick={() => handleNewTest(TestLength.long, TestDifficulty.easy)}>
+        <li onClick={() => handleNewTest(TestLength.long, TestDifficulty.medium)}>
           Dlouhý test<span> – 20 náhodně vybraných otázek</span>
         </li>
         <li onClick={() => handleNewTest(TestLength.normal, TestDifficulty.easy)}>
@@ -35,6 +52,8 @@ const SituationsTests: React.FC = () => {
           <span> – 10 otázek, ve kterých ostatní uživatelé nejvíce chybují.</span>
         </li>
       </ul>
+      {error && <FormError>{error}</FormError>}
+      {creating && <CustomLoader>Test se vytváří...</CustomLoader>}
     </div>
   );
 };

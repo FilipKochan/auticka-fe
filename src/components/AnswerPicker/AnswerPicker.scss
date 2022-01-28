@@ -1,0 +1,43 @@
+.AnswerPicker {
+  max-width: 450px;
+  > * {
+    padding: 1rem;
+    margin: 0;
+  }
+  &__body {
+    padding-left: 3rem;
+    background-color: var(--tmavemodra);
+    color: #fff;
+    list-style-position: inside;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  &__option {
+    cursor: pointer;
+    text-align: justify;
+    &--active {
+      &::before {
+        left: -8px !important;
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  &__header {
+    padding: 1rem;
+    background-color: var(--oranzova2);
+    color: var(--tmavemodra);
+    text-align: center;
+  }
+  &__question {
+    font-size: 1.5rem;
+  }
+  &__submit {
+    padding-top: 0;
+    background-color: var(--tmavemodra);
+    display: grid;
+    place-items: center;
+  }
+}
