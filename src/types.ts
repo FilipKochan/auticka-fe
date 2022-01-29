@@ -69,3 +69,22 @@ export interface SituaceState {
 export interface Test {
   testLength: number;
 }
+
+export interface TestResult {
+  correctAnswers: number;
+  totalQuestions: number;
+  situations: TestResultSituace[];
+}
+
+export interface TestResultSituace {
+  situationId: number;
+  question?: string;
+  correctAnswer: number;
+  userAnswer: number;
+  possibleAnswers: TestResultSituaceAnswer[];
+}
+
+export interface TestResultSituaceAnswer {
+  answerId: number;
+  answerText: string;
+}

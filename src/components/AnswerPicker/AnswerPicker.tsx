@@ -33,7 +33,7 @@ const AnswerPicker = () => {
     if (testId === undefined || question === undefined) return;
     const questionInt = parseInt(question);
     if (questionInt + 1 >= testLength) {
-      navigate(generatePath('/results/:testId', { testId }));
+      navigate(generatePath('/vysledky/:testId', { testId }));
     } else {
       navigate(generatePath('/test/:testId/:question', { testId, question: questionInt + 1 + '' }));
     }
@@ -48,7 +48,7 @@ const AnswerPicker = () => {
       <div className="AnswerPicker__header">
         <div className="AnswerPicker__question">{situace.otazka ? situace.otazka : 'Vyberte správnou odpověď:'}</div>
         <div className="AnswerPicker__questionNumber">
-          (otázka {question} z {testLength})
+          (otázka {parseInt(question) + 1} z {testLength})
         </div>
       </div>
       <ol className="AnswerPicker__body">

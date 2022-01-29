@@ -78,7 +78,7 @@ const CreateAccount = () => {
               <ErrorMessage name="name" component={FormError} />
               <Field type="password" name="password" placeholder="Heslo" />
               <ErrorMessage name="password" component={FormError} />
-              <Field type="password" name="passwordRepeat" placeholder="Ptovrzení hesla" />
+              <Field type="password" name="passwordRepeat" placeholder="Potvrzení hesla" />
               <ErrorMessage name="passwordRepeat" component={FormError} />
               {errorResponse && <FormError>{errorResponse}</FormError>}
               <CustomButton type="submit" variant="primary" loading={isSubmitting || state === Status.requesting}>

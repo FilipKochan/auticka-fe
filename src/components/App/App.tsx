@@ -12,6 +12,7 @@ import CreateAccount from '../../containers/CreateAccount/CreateAccount';
 import { useDispatch } from 'react-redux';
 import './App.scss';
 import { setUserFromJWT } from '../../actions/userActions';
+import Results from '../../containers/Restults/Results';
 
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const App: React.FC<{}> = () => {
           <Route path="/muj-ucet" element={<MyAccount />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/novy-ucet" element={<CreateAccount />} />
+          <Route path="/vysledky/:testId" element={<Results />} />
         </Routes>
       </Layout>
     </div>
