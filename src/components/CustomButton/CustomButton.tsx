@@ -10,9 +10,11 @@ const CustomButton: React.FC<{
   variant: 'primary' | 'secondary';
   loading?: boolean;
   style?: React.CSSProperties;
-}> = ({ children, disabled, onClick, type, variant, loading = false, style }) => {
+  ariaLabel?: string;
+}> = ({ children, disabled, onClick, type, variant, loading = false, style, ariaLabel }) => {
   return (
     <button
+      aria-label={ariaLabel}
       type={type}
       className={`CustomButton--${variant} ${classHandler(`CustomButton`, false, false, disabled || loading)}`}
       disabled={disabled || loading}

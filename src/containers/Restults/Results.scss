@@ -1,0 +1,38 @@
+.Results {
+  padding: 2rem 2rem;
+  margin: auto 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  &__PageControls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+  }
+  color: #fff;
+
+  &__MainBody {
+    padding: 1rem;
+    background-color: var(--tmavemodra);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+  }
+  &__Header {
+    text-align: center;
+  }
+
+  &__NewTest {
+    display: flex;
+    justify-content: center;
+  }
+
+  &--strong {
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+}

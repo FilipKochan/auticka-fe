@@ -8,6 +8,7 @@ import './AnswerPicker.scss';
 import CustomButton from '../CustomButton/CustomButton';
 import { answerTestQuestion } from '../../api/situationsTests';
 import FormError from '../FormError/FormError';
+import { DEFAULT_QUESTION } from '../../constants';
 
 const AnswerPicker = () => {
   const situace = useSelector(getSituation);
@@ -46,7 +47,7 @@ const AnswerPicker = () => {
   return (
     <div className="AnswerPicker">
       <div className="AnswerPicker__header">
-        <div className="AnswerPicker__question">{situace.otazka ? situace.otazka : 'Vyberte správnou odpověď:'}</div>
+        <div className="AnswerPicker__question">{situace.otazka ? situace.otazka : DEFAULT_QUESTION}</div>
         <div className="AnswerPicker__questionNumber">
           (otázka {parseInt(question) + 1} z {testLength})
         </div>

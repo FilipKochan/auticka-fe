@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import './App.scss';
 import { setUserFromJWT } from '../../actions/userActions';
 import Results from '../../containers/Restults/Results';
+import FormError from '../FormError/FormError';
 
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,16 @@ const App: React.FC<{}> = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/novy-ucet" element={<CreateAccount />} />
           <Route path="/vysledky/:testId" element={<Results />} />
+          <Route
+            path="*"
+            element={
+              <div style={{ margin: 'auto' }}>
+                <FormError style={{ width: 'max-content', fontSize: '1.5rem' }}>
+                  Jejda, daná stránka nejspíš neexistuje...
+                </FormError>
+              </div>
+            }
+          />
         </Routes>
       </Layout>
     </div>

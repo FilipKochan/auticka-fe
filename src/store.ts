@@ -5,6 +5,7 @@ import { userReducer } from './reducers/userReducer';
 import { situationReducer } from './reducers/situationReducer';
 import { testReducer } from './reducers/testReducer';
 import thunk from 'redux-thunk';
+import { testResultReducer } from './reducers/testResultReducer';
 
 const store = createStore(
   combineReducers({
@@ -12,6 +13,7 @@ const store = createStore(
     notification: notificationReducer,
     situation: situationReducer,
     test: testReducer,
+    testResult: testResultReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

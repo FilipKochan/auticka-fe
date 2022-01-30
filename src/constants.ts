@@ -1,4 +1,5 @@
 export const apiBaseUrl = 'http://localhost:3001';
+export const DEFAULT_QUESTION = 'Vyberte správnou odpověď:';
 
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
@@ -13,3 +14,7 @@ export const SET_SITUATION_SUCCESS = 'SET_SITUATION_SUCCESS';
 export const SET_SITUATION_ERROR = 'SET_SITUATION_ERROR';
 
 export const SET_TEST_LENGTH = 'SET_TEST_LENGTH';
+
+export const SET_TEST_RESULT_SUCCESS = 'SET_TEST_RESULT_SUCCESS';
+export const SET_TEST_RESULT_REQUESTING = 'SET_TEST_RESULT_REQUESTING';
+export const SET_TEST_RESULT_ERROR = 'SET_TEST_RESULT_ERROR';

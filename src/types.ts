@@ -31,6 +31,7 @@ export interface State {
   notification: Notification;
   situation: SituaceState;
   test: Test;
+  testResult: TestResultState;
 }
 
 export enum Status {
@@ -76,8 +77,15 @@ export interface TestResult {
   situations: TestResultSituace[];
 }
 
+export interface TestResultState {
+  state: Status;
+  errorMsg?: string;
+  testResult?: TestResult;
+}
+
 export interface TestResultSituace {
   situationId: number;
+  order: number;
   question?: string;
   correctAnswer: number;
   userAnswer: number;
